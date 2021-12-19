@@ -1,4 +1,4 @@
-package com.ninjaone.rmm.controller.health_check;
+package com.ninjaone.app.rmm.controller.health_check;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

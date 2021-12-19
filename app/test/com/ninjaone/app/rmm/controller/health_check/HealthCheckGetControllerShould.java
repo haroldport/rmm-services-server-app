@@ -1,6 +1,6 @@
-package com.ninjaone.rmm.controller.health_check;
+package com.ninjaone.app.rmm.controller.health_check;
 
-import com.ninjaone.rmm.controller.RequestTestCase;
+import com.ninjaone.app.rmm.controller.RequestTestCase;
 import org.junit.jupiter.api.Test;
 
 final class HealthCheckGetControllerShould extends RequestTestCase {

@@ -1,6 +1,6 @@
-package com.ninjaone.rmm.controller.devices;
+package com.ninjaone.app.rmm.controller.devices;
 
-import com.ninjaone.rmm.controller.RequestTestCase;
+import com.ninjaone.app.rmm.controller.RequestTestCase;
 import org.junit.jupiter.api.Test;
 
 public class DevicesPostControllerShould extends RequestTestCase {
@@ -9,7 +9,7 @@ public class DevicesPostControllerShould extends RequestTestCase {
         assertRequestWithBody(
             "POST",
             "/devices",
-            "{\"systemName\": \"Macbook Pro\", \"type\": \"Windows Workstation\"}",
+            "{\"systemName\": \"Dell\", \"type\": \"Windows Workstation\"}",
             201
         );
     }
