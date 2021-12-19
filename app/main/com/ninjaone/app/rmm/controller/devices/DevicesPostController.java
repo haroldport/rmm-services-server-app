@@ -1,5 +1,6 @@
 package com.ninjaone.app.rmm.controller.devices;
 
+import com.ninjaone.rmm.devices.application.CreateDeviceRequest;
 import com.ninjaone.rmm.devices.application.DeviceCreator;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,7 +21,7 @@ public class DevicesPostController {
     @PostMapping("/devices")
     @ResponseStatus(HttpStatus.CREATED)
     public void create(@RequestBody Request request) {
-        creator.create(UUID.randomUUID().toString(), request.systemName(), request.type());
+        creator.create(new CreateDeviceRequest(UUID.randomUUID().toString(), request.systemName(), request.type()));
     }
 }
 

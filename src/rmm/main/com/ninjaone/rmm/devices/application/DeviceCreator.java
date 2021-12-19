@@ -12,8 +12,8 @@ public final class DeviceCreator {
         this.repository = repository;
     }
 
-    public void create(String id, String systemName, String type) {
-        Device device = new Device(id, systemName, type);
+    public void create(CreateDeviceRequest request) {
+        Device device = new Device(request.id(), request.systemName(), request.type());
 
         this.repository.save(device);
     }

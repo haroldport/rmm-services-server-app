@@ -14,7 +14,7 @@ final class DeviceCreatorShould {
 
         Device device = new Device("some-id", "Dell", "Windows Workstation");
 
-        creator.create(device.id(), device.systemName(), device.type());
+        creator.create(new CreateDeviceRequest(device.id(), device.systemName(), device.type()));
 
         verify(repository, atLeastOnce()).save(device);
     }
