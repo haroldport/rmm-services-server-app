@@ -3,25 +3,26 @@ package com.ninjaone.rmm.devices.domain;
 import java.util.Objects;
 
 public final class Device {
-    private final String id;
-    private final String systemName;
-    private final String type;
 
-    public Device(String id, String systemName, String type) {
+    private final DeviceId id;
+    private final DeviceSystemName systemName;
+    private final DeviceType type;
+
+    public Device(DeviceId id, DeviceSystemName systemName, DeviceType type) {
         this.id = id;
         this.systemName = systemName;
         this.type = type;
     }
 
-    public String id() {
+    public DeviceId id() {
         return id;
     }
 
-    public String systemName() {
+    public DeviceSystemName systemName() {
         return systemName;
     }
 
-    public String type() {
+    public DeviceType type() {
         return type;
     }
 
@@ -30,9 +31,7 @@ public final class Device {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Device device = (Device) o;
-        return Objects.equals(id, device.id)
-            && Objects.equals(systemName, device.systemName)
-            && Objects.equals(type, device.type);
+        return id.equals(device.id) && systemName.equals(device.systemName) && type.equals(device.type);
     }
 
     @Override

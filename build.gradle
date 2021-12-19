@@ -18,6 +18,7 @@ allprojects {
     // Test
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.3.2'
     testImplementation 'org.mockito:mockito-core:4.1.0'
+    testImplementation 'com.github.javafaker:javafaker:1.0.2'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.3.2'
   }
 
@@ -107,7 +108,6 @@ mainClassName = 'com.ninjaone.Starter'
 dependencies {
   implementation("org.springframework.boot:spring-boot-starter-web")
 
-  implementation project(":shared")
   implementation project(":rmm")
 
   testImplementation("org.springframework.boot:spring-boot-starter-test")

@@ -1,7 +1,6 @@
 package com.ninjaone.rmm.devices.application;
 
-import com.ninjaone.rmm.devices.domain.Device;
-import com.ninjaone.rmm.devices.domain.DeviceRepository;
+import com.ninjaone.rmm.devices.domain.*;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -13,7 +12,11 @@ public final class DeviceCreator {
     }
 
     public void create(CreateDeviceRequest request) {
-        Device device = new Device(request.id(), request.systemName(), request.type());
+        DeviceId id = new DeviceId(request.id());
+        DeviceSystemName systemName = new DeviceSystemName(request.systemName());
+        DeviceType type = new DeviceType(request.type());
+
+        Device device = new Device(id, systemName, type);
 
         this.repository.save(device);
     }

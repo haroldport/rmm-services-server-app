@@ -1,7 +1,6 @@
 package com.ninjaone.rmm.devices.application;
 
-import com.ninjaone.rmm.devices.domain.Device;
-import com.ninjaone.rmm.devices.domain.DeviceRepository;
+import com.ninjaone.rmm.devices.domain.*;
 import org.junit.jupiter.api.Test;
 
 import static org.mockito.Mockito.*;
@@ -12,9 +11,11 @@ final class DeviceCreatorShould {
         DeviceRepository repository = mock(DeviceRepository.class);
         DeviceCreator creator = new DeviceCreator(repository);
 
-        Device device = new Device("some-id", "Dell", "Windows Workstation");
+        CreateDeviceRequest request = CreateDeviceRequestMother.random();
 
-        creator.create(new CreateDeviceRequest(device.id(), device.systemName(), device.type()));
+        Device device = DeviceMother.fromRequest(request);
+
+        creator.create(request);
 
         verify(repository, atLeastOnce()).save(device);
     }

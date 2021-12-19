@@ -1,4 +1,4 @@
-package com.ninjaone.rmm.shared.domain;
+package com.ninjaone.shared.domain;
 
 @org.springframework.stereotype.Service
 public @interface Service {}
