@@ -1,0 +1,8 @@
+rootProject.name = 'rmm-services-server-app'
+
+include ':rmm'
+project(':rmm').projectDir = new File('src/rmm')
+
+include ':shared'
+project(':shared').projectDir = new File('src/shared')
+
