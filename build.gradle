@@ -114,6 +114,7 @@ mainClassName = 'com.ninjaone.app.Starter'
 dependencies {
   implementation("org.springframework.boot:spring-boot-starter-web")
 
+  implementation project(":shared")
   implementation project(":rmm")
 
   testImplementation("org.springframework.boot:spring-boot-starter-test")
