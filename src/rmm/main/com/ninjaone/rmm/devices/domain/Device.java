@@ -14,6 +14,12 @@ public final class Device {
         this.type = type;
     }
 
+    public Device() {
+        id = null;
+        systemName = null;
+        type = null;
+    }
+
     public DeviceId id() {
         return id;
     }
