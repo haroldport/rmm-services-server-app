@@ -15,6 +15,7 @@ allprojects {
     implementation 'org.apache.logging.log4j:log4j-core:2.16.0'
     implementation 'com.vlkan.log4j2:log4j2-logstash-layout:1.0.5'
     implementation 'io.github.cdimascio:java-dotenv:5.2.2'
+    implementation 'com.google.guava:guava:r09'
 
     implementation 'org.hibernate:hibernate-core:5.6.2.Final'
     implementation 'org.springframework:spring-orm:5.2.18.RELEASE'

@@ -1,15 +1,18 @@
 package com.ninjaone.app;
 
+import com.ninjaone.shared.infrastructure.spring.ApiExceptionMiddleware;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.FilterType;
 
 import com.ninjaone.shared.domain.Service;
+import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
 import java.util.Arrays;
 
@@ -19,6 +22,12 @@ import java.util.Arrays;
     value = {"com.ninjaone.app", "com.ninjaone.shared", "com.ninjaone.rmm"}
 )
 public class Starter {
+    private final RequestMappingHandlerMapping mapping;
+
+    public Starter(RequestMappingHandlerMapping mapping) {
+        this.mapping = mapping;
+    }
+
     public static void main(String[] args) {
         SpringApplication.run(Starter.class, args);
     }
@@ -36,5 +45,14 @@ public class Starter {
             }
 
         };
+    }
+
+    @Bean
+    public FilterRegistrationBean<ApiExceptionMiddleware> basicHttpAuthMiddleware() {
+        FilterRegistrationBean<ApiExceptionMiddleware> registrationBean = new FilterRegistrationBean<>();
+
+        registrationBean.setFilter(new ApiExceptionMiddleware(mapping));
+
+        return registrationBean;
     }
 }

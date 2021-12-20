@@ -19,7 +19,7 @@ public class DeviceMother {
         return create(
             DeviceIdMother.random(),
             DeviceSystemNameMother.random(),
-            DeviceTypeMother.random()
+            DeviceTypeMother.randomValidValues()
         );
     }
 }

@@ -7,7 +7,11 @@ public final class CreateDeviceRequestMother {
         return new CreateDeviceRequest(id.value(), systemName.value(), type.value());
     }
 
-    public static CreateDeviceRequest random() {
-        return create(DeviceIdMother.random(), DeviceSystemNameMother.random(), DeviceTypeMother.random());
+    public static CreateDeviceRequest randomWithValidDeviceType() {
+        return create(DeviceIdMother.random(), DeviceSystemNameMother.random(), DeviceTypeMother.randomValidValues());
+    }
+
+    public static CreateDeviceRequest randomWithInvalidDeviceType() {
+        return create(DeviceIdMother.random(), DeviceSystemNameMother.random(), DeviceTypeMother.randomInvalidValues());
     }
 }
