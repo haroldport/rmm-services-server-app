@@ -3,7 +3,6 @@ package com.ninjaone.rmm.devices.infrastructure;
 import com.ninjaone.rmm.devices.domain.Device;
 import com.ninjaone.rmm.devices.domain.DeviceIdMother;
 import com.ninjaone.rmm.devices.domain.DeviceMother;
-import com.ninjaone.rmm.devices.infrastructure.persistence.InMemoryDeviceRepository;
 import org.junit.jupiter.api.Test;
 
 import java.util.Optional;

@@ -1,12 +1,21 @@
-.PONY: all build test
-
+.PHONY: all
 all: build
 
-build:
-	@./gradlew assemble --warning-mode all
+.PHONY: up
+up:
+	@docker-compose up -d
 
+.PHONY: build
+build:
+	@./gradlew build --warning-mode all
+
+.PHONY: run-tests
+run-tests:
+	@./gradlew test --warning-mode all
+
+.PHONY: test
 test:
-	@./gradlew check --warning-mode all
+	@docker exec ninjaone-rmm_services_server_app-java ./gradlew test --warning-mode all
 
 .PHONY: run
 run:

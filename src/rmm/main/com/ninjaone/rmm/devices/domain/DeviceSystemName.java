@@ -6,4 +6,8 @@ public class DeviceSystemName extends StringValueObject {
     public DeviceSystemName(String value) {
         super(value);
     }
+
+    public DeviceSystemName() {
+        super("");
+    }
 }

@@ -1,14 +1,12 @@
-package com.ninjaone.rmm.devices.infrastructure.persistence;
+package com.ninjaone.rmm.devices.infrastructure;
 
 import com.ninjaone.rmm.devices.domain.Device;
 import com.ninjaone.rmm.devices.domain.DeviceId;
 import com.ninjaone.rmm.devices.domain.DeviceRepository;
-import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.Optional;
 
-@Service
 public final class InMemoryDeviceRepository implements DeviceRepository {
     private final HashMap<String, Device> devices = new HashMap<>();
 

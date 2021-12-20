@@ -14,6 +14,15 @@ allprojects {
     // Prod
     implementation 'org.apache.logging.log4j:log4j-core:2.16.0'
     implementation 'com.vlkan.log4j2:log4j2-logstash-layout:1.0.5'
+    implementation 'io.github.cdimascio:java-dotenv:5.2.2'
+
+    implementation 'org.hibernate:hibernate-core:5.6.2.Final'
+    implementation 'org.springframework:spring-orm:5.2.18.RELEASE'
+    implementation 'org.apache.tomcat:tomcat-dbcp:10.0.14'
+    implementation 'com.sun.xml.bind:jaxb-impl:3.0.1'
+    implementation 'javax.xml.bind:jaxb-api:2.3.1'
+    implementation 'org.springframework:spring-context-support:5.2.18.RELEASE'
+    runtimeOnly 'org.postgresql:postgresql'
 
     // Test
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.3.2'
@@ -117,5 +126,6 @@ dependencies {
   implementation project(":shared")
   implementation project(":rmm")
 
-  testImplementation("org.springframework.boot:spring-boot-starter-test")
+  testImplementation 'org.springframework.boot:spring-boot-starter-test:2.3.12.RELEASE'
+  testImplementation project(":shared").sourceSets.test.output
 }

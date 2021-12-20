@@ -6,4 +6,8 @@ public class DeviceType extends StringValueObject {
     public DeviceType(String value) {
         super(value);
     }
+
+    public DeviceType() {
+        super("");
+    }
 }
