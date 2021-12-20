@@ -1,23 +1,30 @@
 package com.ninjaone.rmm.devices.application;
 
-import com.ninjaone.rmm.devices.domain.*;
+import com.ninjaone.rmm.devices.DevicesModuleUnitTestCase;
+import com.ninjaone.rmm.devices.domain.Device;
+import com.ninjaone.rmm.devices.domain.DeviceMother;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.mockito.Mockito.*;
+final class DeviceCreatorShould extends DevicesModuleUnitTestCase {
+    private DeviceCreator creator;
 
-final class DeviceCreatorShould {
+    @BeforeEach
+    protected void setUp(){
+        super.setUp();
+
+        creator = new DeviceCreator(repository);
+    }
+
     @Test
     void save_a_valid_device() {
-        DeviceRepository repository = mock(DeviceRepository.class);
-        DeviceCreator creator = new DeviceCreator(repository);
-
         CreateDeviceRequest request = CreateDeviceRequestMother.random();
 
         Device device = DeviceMother.fromRequest(request);
 
         creator.create(request);
 
-        verify(repository, atLeastOnce()).save(device);
+        shouldHaveSaved(device);
     }
 
 }
