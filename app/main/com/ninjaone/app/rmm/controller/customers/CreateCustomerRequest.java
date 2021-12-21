@@ -1,6 +1,6 @@
 package com.ninjaone.app.rmm.controller.customers;
 
-public final class Request {
+public final class CreateCustomerRequest {
     private String username;
     private String password;
 

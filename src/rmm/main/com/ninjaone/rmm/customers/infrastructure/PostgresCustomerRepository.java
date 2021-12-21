@@ -1,8 +1,6 @@
 package com.ninjaone.rmm.customers.infrastructure;
 
-import com.ninjaone.rmm.customers.domain.Customer;
-import com.ninjaone.rmm.customers.domain.CustomerId;
-import com.ninjaone.rmm.customers.domain.CustomerRepository;
+import com.ninjaone.rmm.customers.domain.*;
 import com.ninjaone.shared.domain.Service;
 import com.ninjaone.shared.domain.criteria.Criteria;
 import com.ninjaone.shared.infrastructure.hibernate.HibernateRepository;
@@ -15,13 +13,20 @@ import java.util.Optional;
 @Service
 @Transactional
 public class PostgresCustomerRepository extends HibernateRepository<Customer> implements CustomerRepository {
-    public PostgresCustomerRepository(SessionFactory sessionFactory) {
+    private final DeviceRepository deviceRepository;
+
+    public PostgresCustomerRepository(SessionFactory sessionFactory, DeviceRepository deviceRepository) {
         super(sessionFactory, Customer.class);
+        this.deviceRepository = deviceRepository;
     }
 
     @Override
     public void save(Customer customer) {
         persist(customer);
+        if (customer.hasDevices()) {
+            Device device = customer.devices().iterator().next();
+            this.deviceRepository.save(device);
+        }
     }
 
     @Override

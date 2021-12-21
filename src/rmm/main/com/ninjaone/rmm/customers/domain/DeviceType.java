@@ -1,4 +1,4 @@
-package com.ninjaone.rmm.devices.domain;
+package com.ninjaone.rmm.customers.domain;
 
 import java.util.HashMap;
 import java.util.Objects;

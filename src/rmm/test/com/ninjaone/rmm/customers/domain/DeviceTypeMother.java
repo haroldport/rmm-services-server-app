@@ -1,9 +1,8 @@
-package com.ninjaone.rmm.devices.domain;
-
-import java.util.List;
+package com.ninjaone.rmm.customers.domain;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Random;
 
 public final class DeviceTypeMother {

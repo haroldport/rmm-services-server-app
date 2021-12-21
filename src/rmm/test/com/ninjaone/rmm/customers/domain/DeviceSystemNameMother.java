@@ -1,4 +1,4 @@
-package com.ninjaone.rmm.devices.domain;
+package com.ninjaone.rmm.customers.domain;
 
 public final class DeviceSystemNameMother {
     public static DeviceSystemName create(String value) {

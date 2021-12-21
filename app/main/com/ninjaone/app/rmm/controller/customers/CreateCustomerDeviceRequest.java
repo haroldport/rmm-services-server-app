@@ -1,6 +1,6 @@
-package com.ninjaone.app.rmm.controller.devices;
+package com.ninjaone.app.rmm.controller.customers;
 
-public final class Request {
+public final class CreateCustomerDeviceRequest {
     private String systemName;
     private String type;
 

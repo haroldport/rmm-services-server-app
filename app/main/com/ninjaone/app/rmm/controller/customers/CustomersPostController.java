@@ -1,6 +1,5 @@
 package com.ninjaone.app.rmm.controller.customers;
 
-import com.ninjaone.rmm.customers.application.CreateCustomerRequest;
 import com.ninjaone.rmm.customers.application.CustomerCreator;
 import com.ninjaone.rmm.customers.domain.CustomerAlreadyExists;
 import com.ninjaone.rmm.customers.domain.CustomerPasswordInvalid;
@@ -25,8 +24,10 @@ public class CustomersPostController extends ApiController {
 
     @PostMapping("/customers")
     @ResponseStatus(HttpStatus.CREATED)
-    public void create(@RequestBody Request request) {
-        creator.create(new CreateCustomerRequest(UUID.randomUUID().toString(), request.username(), request.password()));
+    public void create(@RequestBody CreateCustomerRequest request) {
+        creator.create(new com.ninjaone.rmm.customers.application.CreateCustomerRequest(
+            UUID.randomUUID().toString(), request.username(), request.password())
+        );
     }
 
     @Override

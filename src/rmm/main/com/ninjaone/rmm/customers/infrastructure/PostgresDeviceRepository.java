@@ -1,13 +1,15 @@
-package com.ninjaone.rmm.devices.infrastructure;
+package com.ninjaone.rmm.customers.infrastructure;
 
-import com.ninjaone.rmm.devices.domain.Device;
-import com.ninjaone.rmm.devices.domain.DeviceId;
-import com.ninjaone.rmm.devices.domain.DeviceRepository;
+import com.ninjaone.rmm.customers.domain.Device;
+import com.ninjaone.rmm.customers.domain.DeviceId;
+import com.ninjaone.rmm.customers.domain.DeviceRepository;
 import com.ninjaone.shared.domain.Service;
+import com.ninjaone.shared.domain.criteria.Criteria;
 import com.ninjaone.shared.infrastructure.hibernate.HibernateRepository;
 import org.hibernate.SessionFactory;
 
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -25,5 +27,10 @@ public class PostgresDeviceRepository extends HibernateRepository<Device> implem
     @Override
     public Optional<Device> search(DeviceId id) {
         return byId(id);
+    }
+
+    @Override
+    public List<Device> matching(Criteria criteria) {
+        return byCriteria(criteria);
     }
 }
