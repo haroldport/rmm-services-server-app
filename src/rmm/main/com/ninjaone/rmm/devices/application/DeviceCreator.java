@@ -1,7 +1,7 @@
 package com.ninjaone.rmm.devices.application;
 
 import com.ninjaone.rmm.devices.domain.*;
-import org.springframework.stereotype.Service;
+import com.ninjaone.shared.domain.Service;
 
 @Service
 public final class DeviceCreator {

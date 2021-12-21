@@ -13,6 +13,10 @@ public abstract class Identifier implements Serializable {
         this.value = value;
     }
 
+    protected Identifier() {
+        this.value = null;
+    }
+
     private void ensureIsValidUUID(String value) {
         UUID.fromString(value);
     }

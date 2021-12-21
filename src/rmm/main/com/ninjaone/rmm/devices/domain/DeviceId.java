@@ -6,4 +6,7 @@ public class DeviceId extends Identifier {
     public DeviceId(String value) {
         super(value);
     }
+
+    public DeviceId() {
+    }
 }

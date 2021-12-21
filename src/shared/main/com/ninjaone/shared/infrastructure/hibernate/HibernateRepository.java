@@ -1,6 +1,7 @@
 package com.ninjaone.shared.infrastructure.hibernate;
 
 import com.ninjaone.shared.domain.Identifier;
+import com.ninjaone.shared.domain.criteria.Criteria;
 import org.hibernate.SessionFactory;
 
 import javax.persistence.criteria.CriteriaQuery;
@@ -10,10 +11,12 @@ import java.util.Optional;
 public abstract class HibernateRepository<T> {
     protected final SessionFactory             sessionFactory;
     protected final Class<T>                   aggregateClass;
+    protected final HibernateCriteriaConverter criteriaConverter;
 
     public HibernateRepository(SessionFactory sessionFactory, Class<T> aggregateClass) {
         this.sessionFactory    = sessionFactory;
         this.aggregateClass    = aggregateClass;
+        this.criteriaConverter = new HibernateCriteriaConverter<T>(sessionFactory.getCriteriaBuilder());
     }
 
     protected void persist(T entity) {
@@ -26,11 +29,9 @@ public abstract class HibernateRepository<T> {
         return Optional.ofNullable(sessionFactory.getCurrentSession().byId(aggregateClass).load(id));
     }
 
-    protected List<T> all() {
-        CriteriaQuery<T> criteria = sessionFactory.getCriteriaBuilder().createQuery(aggregateClass);
+    protected List<T> byCriteria(Criteria criteria) {
+        CriteriaQuery<T> hibernateCriteria = criteriaConverter.convert(criteria, aggregateClass);
 
-        criteria.from(aggregateClass);
-
-        return sessionFactory.getCurrentSession().createQuery(criteria).getResultList();
+        return sessionFactory.getCurrentSession().createQuery(hibernateCriteria).getResultList();
     }
 }

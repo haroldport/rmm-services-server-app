@@ -1,0 +1,20 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.ninjaone.rmm.customers.domain.Customer" table="customers">
+        <composite-id name="id" class="com.ninjaone.rmm.customers.domain.CustomerId" access="field">
+            <key-property column="id" name="value" length="36" access="field" />
+        </composite-id>
+
+        <component name="username" class="com.ninjaone.rmm.customers.domain.CustomerUserName" access="field">
+            <property name="value" column="username" type="string" access="field" />
+        </component>
+
+        <component name="password" class="com.ninjaone.rmm.customers.domain.CustomerPassword" access="field">
+            <property name="value" column="password" type="string" length="8" access="field" />
+        </component>
+    </class>
+</hibernate-mapping>
