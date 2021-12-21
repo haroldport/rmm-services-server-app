@@ -6,9 +6,11 @@ import com.ninjaone.shared.domain.Service;
 @Service
 public final class CustomerDeviceCreator {
     private final CustomerRepository repository;
+    private final CustomerFinder customerFinder;
 
     public CustomerDeviceCreator(CustomerRepository repository) {
         this.repository = repository;
+        customerFinder = new CustomerFinder(repository);
     }
 
     public void create(CreateCustomerDeviceRequest request) {
@@ -17,16 +19,12 @@ public final class CustomerDeviceCreator {
         DeviceType type = new DeviceType(request.type());
         CustomerId customerId = new CustomerId(request.customerId());
 
-        Customer customer = ensureCustomerExists(customerId);
+        Customer customer = customerFinder.find(customerId);
 
         Device device = new Device(id, systemName, type, customerId);
 
         customer.addOrUpdateDevice(device);
 
         this.repository.save(customer);
-    }
-
-    private Customer ensureCustomerExists(CustomerId customerId) {
-        return this.repository.search(customerId).orElseThrow(() -> new CustomerNotExist(customerId));
     }
 }
