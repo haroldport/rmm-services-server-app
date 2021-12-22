@@ -25,6 +25,11 @@ public class PostgresDeviceRepository extends HibernateRepository<Device> implem
     }
 
     @Override
+    public void delete(Device device) {
+        remove(device);
+    }
+
+    @Override
     public Optional<Device> search(DeviceId id) {
         return byId(id);
     }

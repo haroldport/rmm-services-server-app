@@ -8,6 +8,8 @@ import java.util.Optional;
 public interface DeviceRepository {
     void save(Device device);
 
+    void delete(Device device);
+
     Optional<Device> search(DeviceId id);
 
     List<Device> matching(Criteria criteria);

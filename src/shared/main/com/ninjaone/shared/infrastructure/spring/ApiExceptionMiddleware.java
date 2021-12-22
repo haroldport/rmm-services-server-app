@@ -69,10 +69,14 @@ public final class ApiExceptionMiddleware implements Filter {
         PrintWriter writer = response.getWriter();
         writer.write(String.format(
             "{\"error_code\": \"%s\", \"message\": \"%s\"}",
-            errorCode,
-            errorMessage
+            isConstraintViolation(errorMessage) ? "constraint_violation" : errorCode,
+            isConstraintViolation(errorMessage) ? "Required values null or empty." : errorMessage
         ));
         writer.close();
+    }
+
+    private Boolean isConstraintViolation(String errorMessage) {
+        return errorMessage.contains("ConstraintViolationException");
     }
 
     private String errorCodeFor(Throwable error) {
