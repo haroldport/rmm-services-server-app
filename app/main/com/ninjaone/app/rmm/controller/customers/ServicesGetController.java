@@ -1,6 +1,6 @@
 package com.ninjaone.app.rmm.controller.customers;
 
-import com.ninjaone.rmm.services.application.ServiceFinder;
+import com.ninjaone.rmm.services.application.AllServiceFinder;
 import com.ninjaone.rmm.services.application.ServiceResponse;
 import com.ninjaone.shared.domain.DomainError;
 import com.ninjaone.shared.infrastructure.spring.ApiController;
@@ -14,9 +14,9 @@ import java.util.stream.Collectors;
 
 @RestController
 public final class ServicesGetController extends ApiController {
-    private final ServiceFinder finder;
+    private final AllServiceFinder finder;
 
-    public ServicesGetController(ServiceFinder finder) {
+    public ServicesGetController(AllServiceFinder finder) {
         this.finder = finder;
     }
 

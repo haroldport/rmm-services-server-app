@@ -7,10 +7,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public final class ServiceFinder {
+public final class AllServiceFinder {
     private final ServiceRepository repository;
 
-    public ServiceFinder(ServiceRepository repository) {
+    public AllServiceFinder(ServiceRepository repository) {
         this.repository = repository;
     }
 

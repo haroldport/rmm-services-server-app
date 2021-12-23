@@ -1,0 +1,20 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.ninjaone.rmm.customerServices.domain.CustomerService" table="customer_services">
+        <composite-id name="id" class="com.ninjaone.rmm.customerServices.domain.CustomerServiceId" access="field">
+            <key-property column="id" name="value" length="36" access="field" />
+        </composite-id>
+
+        <component name="customerId" class="com.ninjaone.rmm.customers.domain.CustomerId" access="field">
+            <property name="value" column="customer_id" type="string" access="field" />
+        </component>
+
+        <component name="serviceId" class="com.ninjaone.rmm.services.domain.ServiceId" access="field">
+            <property name="value" column="service_id" type="string" access="field" />
+        </component>
+    </class>
+</hibernate-mapping>

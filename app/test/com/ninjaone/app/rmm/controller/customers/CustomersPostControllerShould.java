@@ -17,7 +17,7 @@ final class CustomersPostControllerShould extends RequestTestCase {
 
     @Test
     void create_a_customer_with_invalid_password() throws Exception {
-        String body = "{\"error_code\": \"customer_password_invalid\", \"message\": \"Password --some-- doesn't meet criteria [8 chars min].\"}";
+        String body = "{\"error_code\": \"customer_password_invalid\", \"message\": \"Password <some> doesn't meet criteria [8 chars min].\"}";
         this.assertRequestWithBody(
             "POST",
             "/customers",

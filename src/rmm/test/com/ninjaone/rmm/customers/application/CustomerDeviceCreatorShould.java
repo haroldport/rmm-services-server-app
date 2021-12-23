@@ -38,7 +38,7 @@ final class CustomerDeviceCreatorShould extends CustomersModuleUnitTestCase {
     }
 
     @Test
-    void throw_an_device_type_invalid_error_when_add_a_device_to_customer_with_invalid_type() {
+    void throw_a_device_type_invalid_error_when_add_a_device_to_customer_with_invalid_type() {
         Customer customer = new Customer(new CustomerId("6c537f5c-032b-4ef8-925e-8fecc0b61c35"), new CustomerUserName("haroldport"), new CustomerPassword("Test1234"));
 
         when(repository.search(customer.id())).thenReturn(Optional.of(customer));
@@ -57,7 +57,7 @@ final class CustomerDeviceCreatorShould extends CustomersModuleUnitTestCase {
     }
 
     @Test
-    void throw_an_customer_not_exist_error_when_add_a_device_to_non_existint_customer() {
+    void throw_a_customer_not_exist_error_when_add_a_device_to_non_existint_customer() {
         Customer customer = new Customer(new CustomerId("6c537f5c-032b-4ef8-925e-8fecc0b61c35"), new CustomerUserName("haroldport"), new CustomerPassword("Test1234"));
 
         CustomerNotExist thrown = assertThrows(CustomerNotExist.class, () -> {
