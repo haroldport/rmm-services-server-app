@@ -7,5 +7,7 @@ import java.util.List;
 public interface CustomerServiceRepository {
     void save(CustomerService customerService);
 
+    void delete(CustomerService customerService);
+
     List<CustomerService> matching(Criteria criteria);
 }

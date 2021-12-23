@@ -23,6 +23,11 @@ public class PostgresCustomerServiceRepository extends HibernateRepository<Custo
     }
 
     @Override
+    public void delete(CustomerService customerService) {
+        remove(customerService);
+    }
+
+    @Override
     public List<CustomerService> matching(Criteria criteria) {
         return byCriteria(criteria);
     }

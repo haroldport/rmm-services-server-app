@@ -1,4 +1,4 @@
-package com.ninjaone.app.rmm.controller.customers;
+package com.ninjaone.app.rmm.controller.services;
 
 import com.ninjaone.rmm.services.application.AllServiceFinder;
 import com.ninjaone.rmm.services.application.ServiceResponse;

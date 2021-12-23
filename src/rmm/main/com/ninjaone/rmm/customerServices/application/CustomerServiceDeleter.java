@@ -13,13 +13,13 @@ import com.ninjaone.rmm.services.domain.ServiceRepository;
 import java.util.Optional;
 
 @com.ninjaone.shared.domain.Service
-public final class CustomerServiceCreator {
+public final class CustomerServiceDeleter {
     private final CustomerServiceRepository repository;
     private final CustomerFinder customerFinder;
     private final ServiceFinder serviceFinder;
     private final CustomerServiceFinder customerServiceFinder;
 
-    public CustomerServiceCreator(CustomerServiceRepository repository, CustomerRepository customerRepository,
+    public CustomerServiceDeleter(CustomerServiceRepository repository, CustomerRepository customerRepository,
                                   ServiceRepository serviceRepository) {
         this.repository = repository;
         customerFinder = new CustomerFinder(customerRepository);
@@ -27,25 +27,23 @@ public final class CustomerServiceCreator {
         customerServiceFinder = new CustomerServiceFinder(repository);
     }
 
-    public void create(CreateCustomerServiceRequest request) {
-        CustomerServiceId id = new CustomerServiceId(request.id());
-        CustomerId customerId = new CustomerId(request.customerId());
-        ServiceId serviceId = new ServiceId(request.serviceId());
+    public void delete(String customerId, String serviceId) {
+        CustomerId customerIdVo = new CustomerId(customerId);
+        ServiceId serviceIdVo = new ServiceId(serviceId);
 
-        Customer customer = customerFinder.find(customerId);
-        Service service = serviceFinder.find(serviceId);
+        Customer customer = customerFinder.find(customerIdVo);
+        Service service = serviceFinder.find(serviceIdVo);
 
-        ensureServiceDoesNotAlreadyExistInCustomer(customerId, serviceId);
+        CustomerService customerService = ensureServiceExistInCustomer(customer.id(), service.id());
 
-        CustomerService customerService = new CustomerService(id, customer.id(), service.id());
-
-        this.repository.save(customerService);
+        this.repository.delete(customerService);
     }
 
-    private void ensureServiceDoesNotAlreadyExistInCustomer(CustomerId customerId, ServiceId serviceId) {
+    private CustomerService ensureServiceExistInCustomer(CustomerId customerId, ServiceId serviceId) {
         Optional<CustomerService> customerService = customerServiceFinder.find(customerId, serviceId);
-        if (customerService.isPresent()) {
-            throw new CustomerServiceAlreadyExists(serviceId, customerId);
+        if (!customerService.isPresent()) {
+            throw new CustomerHasNoService(serviceId, customerId);
         }
+        return customerService.get();
     }
 }
