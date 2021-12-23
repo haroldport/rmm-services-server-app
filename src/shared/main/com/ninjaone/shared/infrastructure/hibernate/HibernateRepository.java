@@ -40,4 +40,12 @@ public abstract class HibernateRepository<T> {
 
         return sessionFactory.getCurrentSession().createQuery(hibernateCriteria).getResultList();
     }
+
+    protected List<T> all() {
+        CriteriaQuery<T> criteria = sessionFactory.getCriteriaBuilder().createQuery(aggregateClass);
+
+        criteria.from(aggregateClass);
+
+        return sessionFactory.getCurrentSession().createQuery(criteria).getResultList();
+    }
 }

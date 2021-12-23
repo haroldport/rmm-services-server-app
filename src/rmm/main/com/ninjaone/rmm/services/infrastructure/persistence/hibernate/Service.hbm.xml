@@ -1,0 +1,22 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.ninjaone.rmm.services.domain.Service" table="services">
+        <composite-id name="id" class="com.ninjaone.rmm.services.domain.ServiceId" access="field">
+            <key-property column="id" name="value" length="36" access="field" />
+        </composite-id>
+
+        <component name="name" class="com.ninjaone.rmm.services.domain.ServiceName" access="field">
+            <property name="value" column="name" type="string" access="field" />
+        </component>
+
+        <property name="costs" column="costs" access="field">
+            <type name="json_string">
+                <param name="list_of">com.ninjaone.rmm.services.domain.ServiceCost</param>
+            </type>
+        </property>
+    </class>
+</hibernate-mapping>
