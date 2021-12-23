@@ -20,6 +20,7 @@ public final class HibernateCriteriaConverter<T> {
         put(FilterOperator.LT, HibernateCriteriaConverter.this::lowerThanPredicateTransformer);
         put(FilterOperator.CONTAINS, HibernateCriteriaConverter.this::containsPredicateTransformer);
         put(FilterOperator.NOT_CONTAINS, HibernateCriteriaConverter.this::notContainsPredicateTransformer);
+        put(FilterOperator.IN, HibernateCriteriaConverter.this::inPredicateTransformer);
     }};
 
     public HibernateCriteriaConverter(CriteriaBuilder builder) {
@@ -102,6 +103,14 @@ public final class HibernateCriteriaConverter<T> {
         }
 
         return builder.notLike(root.get(filter.field().value()), filter.value().value());
+    }
+
+    private Predicate inPredicateTransformer(Filter filter, Root<T> root) {
+        if (isValueObject(filter, root)) {
+            return builder.and(root.get(filter.field().value()).get("value").in(filter.values()));
+        }
+
+        return builder.and(root.get(filter.field().value()).in(filter.values()));
     }
 
     private boolean isValueObject(Filter filter, Root<T> root) {

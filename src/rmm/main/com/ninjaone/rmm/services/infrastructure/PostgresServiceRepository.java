@@ -3,6 +3,7 @@ package com.ninjaone.rmm.services.infrastructure;
 import com.ninjaone.rmm.services.domain.Service;
 import com.ninjaone.rmm.services.domain.ServiceId;
 import com.ninjaone.rmm.services.domain.ServiceRepository;
+import com.ninjaone.shared.domain.criteria.Criteria;
 import com.ninjaone.shared.infrastructure.hibernate.HibernateRepository;
 import org.hibernate.SessionFactory;
 
@@ -25,6 +26,11 @@ public class PostgresServiceRepository extends HibernateRepository<Service> impl
     @Override
     public Optional<Service> search(ServiceId id) {
         return byId(id);
+    }
+
+    @Override
+    public List<Service> matching(Criteria criteria) {
+        return byCriteria(criteria);
     }
 
     @Override

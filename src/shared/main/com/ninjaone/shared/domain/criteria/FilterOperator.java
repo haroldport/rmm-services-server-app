@@ -6,7 +6,8 @@ public enum FilterOperator {
     GT(">"),
     LT("<"),
     CONTAINS("CONTAINS"),
-    NOT_CONTAINS("NOT_CONTAINS");
+    NOT_CONTAINS("NOT_CONTAINS"),
+    IN("IN");
 
     private final String operator;
 
@@ -22,6 +23,7 @@ public enum FilterOperator {
             case "<": return FilterOperator.LT;
             case "CONTAINS": return FilterOperator.CONTAINS;
             case "NOT_CONTAINS": return FilterOperator.NOT_CONTAINS;
+            case "IN": return FilterOperator.IN;
             default: return null;
         }
     }

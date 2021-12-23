@@ -46,9 +46,7 @@ CREATE TABLE IF NOT EXISTS customer_services
             on update cascade
     );
 
-truncate table services cascade;
-
-insert into services(id, name, costs) values('dd226ce6-6c05-4111-b042-cfb7e43d8b48', 'Antivirus', '[{"platform": "Windows", "price": 5}, {"platform": "Mac", "price": 7}]');
-insert into services(id, name, costs) values('ac77b045-5ee0-4176-b0f2-e63a6d7252bb', 'Cloudberry', '[{"platform": "Windows", "price": 3}, {"platform": "Mac", "price": 3}]');
-insert into services(id, name, costs) values('db6bad1d-093e-433d-86b1-9896b3f82703', 'PSA', '[{"platform": "Windows", "price": 2}, {"platform": "Mac", "price": 2}]');
-insert into services(id, name, costs) values('6fc77457-44da-48a4-8153-42dae4115b03', 'TeamViewer', '[{"platform": "Windows", "price": 1}, {"platform": "Mac", "price": 1}]');
+insert into services(id, name, costs) values('dd226ce6-6c05-4111-b042-cfb7e43d8b48', 'Antivirus', '[{"platform": "Windows", "price": 5}, {"platform": "Mac", "price": 7}]') on conflict do nothing;
+insert into services(id, name, costs) values('ac77b045-5ee0-4176-b0f2-e63a6d7252bb', 'Cloudberry', '[{"platform": "Windows", "price": 3}, {"platform": "Mac", "price": 3}]') on conflict do nothing;
+insert into services(id, name, costs) values('db6bad1d-093e-433d-86b1-9896b3f82703', 'PSA', '[{"platform": "Windows", "price": 2}, {"platform": "Mac", "price": 2}]') on conflict do nothing;
+insert into services(id, name, costs) values('6fc77457-44da-48a4-8153-42dae4115b03', 'TeamViewer', '[{"platform": "Windows", "price": 1}, {"platform": "Mac", "price": 1}]') on conflict do nothing;
