@@ -16,6 +16,7 @@ allprojects {
     implementation 'com.vlkan.log4j2:log4j2-logstash-layout:1.0.5'
     implementation 'io.github.cdimascio:java-dotenv:5.2.2'
     implementation 'com.google.guava:guava:r09'
+    implementation 'io.jsonwebtoken:jjwt:0.9.1'
 
     implementation 'org.hibernate:hibernate-core:5.6.2.Final'
     implementation 'org.springframework:spring-orm:5.2.18.RELEASE'
@@ -71,6 +72,7 @@ subprojects {
 
   dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.springframework.boot:spring-boot-starter-security")
 
     testImplementation rootProject.sourceSets.main.output
     testImplementation("org.springframework.boot:spring-boot-starter-test")
@@ -123,6 +125,7 @@ mainClassName = 'com.ninjaone.app.Starter'
 
 dependencies {
   implementation("org.springframework.boot:spring-boot-starter-web")
+  implementation("org.springframework.boot:spring-boot-starter-security")
 
   implementation project(":shared")
   implementation project(":rmm")

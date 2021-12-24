@@ -18,11 +18,12 @@ public final class CustomerCreator {
     public void create(CreateCustomerRequest request) {
         CustomerId id = new CustomerId(request.id());
         CustomerUserName username = new CustomerUserName(request.username());
-        CustomerPassword password = new CustomerPassword(request.password());
+        new CustomerPassword(request.password());
 
         ensureCustomerWhenUsernameNotExists(username);
 
-        Customer customer = new Customer(id, username, password);
+        Customer customer = new Customer(id, username,
+            new CustomerPassword(request.encodedPassword()));
 
         this.repository.save(customer);
     }

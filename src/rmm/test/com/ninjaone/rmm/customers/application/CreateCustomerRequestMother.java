@@ -4,7 +4,7 @@ import com.ninjaone.rmm.customers.domain.*;
 
 public final class CreateCustomerRequestMother {
     public static CreateCustomerRequest create(CustomerId id, CustomerUserName username, CustomerPassword password) {
-        return new CreateCustomerRequest(id.value(), username.value(), password.value());
+        return new CreateCustomerRequest(id.value(), username.value(), password.value(), password.value());
     }
 
     public static CreateCustomerRequest random() {

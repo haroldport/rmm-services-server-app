@@ -65,18 +65,22 @@ public final class ApiExceptionMiddleware implements Filter {
 
         httpResponse.reset();
         httpResponse.setHeader("Content-Type", "application/json");
-        httpResponse.setStatus(statusCode);
+        httpResponse.setStatus(areBadCredentials(errorMessage) ? HttpStatus.BAD_REQUEST.value() : statusCode);
         PrintWriter writer = response.getWriter();
         writer.write(String.format(
             "{\"error_code\": \"%s\", \"message\": \"%s\"}",
-            isConstraintViolation(errorMessage) ? "constraint_violation" : errorCode,
-            isConstraintViolation(errorMessage) ? "Required values null or empty." : errorMessage
+            isConstraintViolation(errorMessage) ? "constraint_violation" : areBadCredentials(errorMessage) ? "invalid_credentials" : errorCode,
+            isConstraintViolation(errorMessage) ? "Required values null or empty." : areBadCredentials(errorMessage) ? "Invalid credentials." : errorMessage
         ));
         writer.close();
     }
 
     private Boolean isConstraintViolation(String errorMessage) {
         return errorMessage.contains("ConstraintViolationException");
+    }
+
+    private Boolean areBadCredentials(String errorMessage) {
+        return errorMessage.contains("Bad credentials");
     }
 
     private String errorCodeFor(Throwable error) {

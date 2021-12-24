@@ -6,6 +6,7 @@ import com.ninjaone.rmm.customers.domain.CustomerPasswordInvalid;
 import com.ninjaone.shared.domain.DomainError;
 import com.ninjaone.shared.infrastructure.spring.ApiController;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -17,16 +18,19 @@ import java.util.UUID;
 @RestController
 public class CustomersPostController extends ApiController {
     private final CustomerCreator creator;
+    private final PasswordEncoder encoder;
 
-    public CustomersPostController(CustomerCreator creator) {
+    public CustomersPostController(CustomerCreator creator, PasswordEncoder encoder) {
         this.creator = creator;
+        this.encoder = encoder;
     }
 
-    @PostMapping("/customers")
+    @PostMapping("/auth/signup")
     @ResponseStatus(HttpStatus.CREATED)
-    public void create(@RequestBody CreateCustomerRequest request) {
+    public void create(@RequestBody CustomerCredentialsRequest request) {
         creator.create(new com.ninjaone.rmm.customers.application.CreateCustomerRequest(
-            UUID.randomUUID().toString(), request.username(), request.password())
+            UUID.randomUUID().toString(), request.username(), request.password(),
+            encoder.encode(request.password()))
         );
     }
 

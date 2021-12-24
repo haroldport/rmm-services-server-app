@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS customers
     username varchar(100) not null
         constraint username_uq
             unique,
-    password varchar(8) not null
+    password varchar(100) not null
 );
 
 CREATE TABLE IF NOT EXISTS devices

@@ -4,11 +4,14 @@ public final class CreateCustomerRequest {
     private final String id;
     private final String username;
     private final String password;
+    private final String encodedPassword;
 
-    public CreateCustomerRequest(String id, String username, String password) {
+    public CreateCustomerRequest(String id, String username, String password,
+                                 String encodedPassword) {
         this.id = id;
         this.username = username;
         this.password = password;
+        this.encodedPassword = encodedPassword;
     }
 
     public String id() {
@@ -21,5 +24,9 @@ public final class CreateCustomerRequest {
 
     public String password() {
         return password;
+    }
+
+    public String encodedPassword() {
+        return encodedPassword;
     }
 }
