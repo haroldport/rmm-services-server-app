@@ -35,7 +35,7 @@ class PostgresCustomerRepositoryShould extends CustomersModuleInfrastructureTest
 
     @Test
     void add_valid_device_an_existing_customer() {
-        Customer customer = new Customer(new CustomerId("6c537f5c-032b-4ef8-925e-8fecc0b61c35"), new CustomerUserName("haroldport"), new CustomerPassword("Test1234"));
+        Customer customer = new Customer(new CustomerId("6c537f5c-032b-4ef8-925e-8fecc0b61c35"), CustomerUserNameMother.random(), new CustomerPassword("Test1234"));
         Device device = DeviceMother.random(customer.id());
 
         customer.addOrUpdateDevice(device);

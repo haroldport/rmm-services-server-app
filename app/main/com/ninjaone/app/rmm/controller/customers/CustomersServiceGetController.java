@@ -2,6 +2,7 @@ package com.ninjaone.app.rmm.controller.customers;
 
 import com.ninjaone.app.rmm.controller.util.Util;
 import com.ninjaone.rmm.customers.application.AllCustomerServiceFinder;
+import com.ninjaone.rmm.customers.domain.CustomerNotExist;
 import com.ninjaone.rmm.services.application.ServiceResponse;
 import com.ninjaone.shared.domain.DomainError;
 import com.ninjaone.shared.infrastructure.spring.ApiController;
@@ -30,6 +31,8 @@ public final class CustomersServiceGetController extends ApiController {
 
     @Override
     public HashMap<Class<? extends DomainError>, HttpStatus> errorMapping() {
-        return null;
+        return new HashMap<Class<? extends DomainError>, HttpStatus>() {{
+            put(CustomerNotExist.class, HttpStatus.NOT_FOUND);
+        }};
     }
 }
