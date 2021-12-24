@@ -1,32 +1,29 @@
-package com.ninjaone.rmm.services.application;
+package com.ninjaone.rmm.customers.domain;
 
 import com.ninjaone.rmm.customerServices.domain.CustomerService;
 import com.ninjaone.rmm.customerServices.domain.CustomerServiceRepository;
-import com.ninjaone.rmm.customers.domain.CustomerFinder;
-import com.ninjaone.rmm.customers.domain.CustomerId;
-import com.ninjaone.rmm.customers.domain.CustomerRepository;
+import com.ninjaone.rmm.services.domain.Service;
 import com.ninjaone.rmm.services.domain.ServiceRepository;
-import com.ninjaone.shared.domain.Service;
 import com.ninjaone.shared.domain.criteria.*;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Service
-public final class AllCustomerServiceFinder {
+@com.ninjaone.shared.domain.Service
+public final class AllServiceByCustomerFinder {
     private final CustomerServiceRepository repository;
     private final ServiceRepository serviceRepository;
     private final CustomerFinder customerFinder;
 
-    public AllCustomerServiceFinder(CustomerServiceRepository repository, ServiceRepository serviceRepository,
-                                    CustomerRepository customerRepository) {
+    public AllServiceByCustomerFinder(CustomerServiceRepository repository, ServiceRepository serviceRepository,
+                                      CustomerRepository customerRepository) {
         this.repository = repository;
         this.serviceRepository = serviceRepository;
         customerFinder = new CustomerFinder(customerRepository);
     }
 
-    public List<ServiceResponse> find(String id) {
+    public List<Service> find(String id) {
         CustomerId customerId = new CustomerId(id);
         customerFinder.find(customerId);
         Filter customerFilter = Filter.create("customerId", FilterOperator.EQUAL.value(), customerId.value());
@@ -46,9 +43,6 @@ public final class AllCustomerServiceFinder {
             )
         ));
 
-        return this.serviceRepository.matching(new Criteria(filters, Order.asc("id")))
-            .stream()
-            .map(ServiceResponse::fromAggregate)
-            .collect(Collectors.toList());
+        return this.serviceRepository.matching(new Criteria(filters, Order.asc("id")));
     }
 }

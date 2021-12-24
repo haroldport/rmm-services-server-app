@@ -1,33 +1,25 @@
 package com.ninjaone.rmm.customers.application;
 
-import com.ninjaone.rmm.customers.domain.*;
+import com.ninjaone.rmm.customers.domain.CustomerDeviceFinder;
+import com.ninjaone.rmm.customers.domain.CustomerRepository;
+import com.ninjaone.rmm.customers.domain.Device;
+import com.ninjaone.rmm.customers.domain.DeviceRepository;
 import com.ninjaone.shared.domain.Service;
-import com.ninjaone.shared.domain.criteria.*;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 public final class DevicesByCustomerId {
-    private final DeviceRepository deviceRepository;
-    private final CustomerFinder customerFinder;
+    private final CustomerDeviceFinder customerDeviceFinder;
 
     public DevicesByCustomerId(CustomerRepository repository, DeviceRepository deviceRepository) {
-        this.deviceRepository = deviceRepository;
-        customerFinder = new CustomerFinder(repository);
+        customerDeviceFinder = new CustomerDeviceFinder(repository, deviceRepository);
     }
 
     public List<CustomerDeviceResponse> find(String customerId) {
-        CustomerId id = new CustomerId(customerId);
-        Customer customer = customerFinder.find(id);
-
-        Filter customerIdFilter = Filter.create("customerId", FilterOperator.EQUAL.value(), customer.id().value());
-        Criteria customerIdCriteria = new Criteria(
-            new Filters(Collections.singletonList(customerIdFilter)),
-            Order.asc("id")
-        );
-        return this.deviceRepository.matching(customerIdCriteria)
+        List<Device> devices = customerDeviceFinder.find(customerId);
+        return devices
             .stream()
             .map(CustomerDeviceResponse::fromAggregate)
             .collect(Collectors.toList());

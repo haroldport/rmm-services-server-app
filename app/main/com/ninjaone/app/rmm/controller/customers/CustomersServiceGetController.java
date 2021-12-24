@@ -1,7 +1,7 @@
 package com.ninjaone.app.rmm.controller.customers;
 
 import com.ninjaone.app.rmm.controller.util.Util;
-import com.ninjaone.rmm.services.application.AllCustomerServiceFinder;
+import com.ninjaone.rmm.customers.application.AllCustomerServiceFinder;
 import com.ninjaone.rmm.services.application.ServiceResponse;
 import com.ninjaone.shared.domain.DomainError;
 import com.ninjaone.shared.infrastructure.spring.ApiController;
