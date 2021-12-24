@@ -5,6 +5,7 @@
 ### 📖 Requirements
 - Java runtime version 1.8 or later
 - Gradle version 7.x
+- Docker and docker compose
 
 ### 🚀 Up and running
 1. Clone repository: ```git clone git@github.com:haroldport/rmm-services-server-app.git```
