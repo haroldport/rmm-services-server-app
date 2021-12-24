@@ -63,6 +63,8 @@ curl --request POST \
 ```
 
 ### 🔒 Secured endpoints
+**To run the secured endpoints, the Bearer Token obtained at login (`accessToken`) must be used.**
+
 Get all available services:
 ```javascript
 GET /services
@@ -279,6 +281,14 @@ curl --request GET \
    "data": {
        "monthlyCost": 71.0
    }
+}
+```
+
+## Response Error Format
+```javascript
+{
+  "error_code": "customer_service_already_exists",
+  "message": "Service <6fc77457-44da-48a4-8153-42dae4115b03> is already exists in customer <202b6b0f-3a35-4edf-bdd2-39d74e90add1>."
 }
 ```
 
